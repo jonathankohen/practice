@@ -1,36 +1,34 @@
-import Product as other_products
-
-
 class Store:
     def __init__(self, name):
         self.name = name
         self.products = []
 
-    def display_product_names(self):
+    def display_products(self):
         counter = 0
         for i in self.products:
             counter += 1
-            print(f"{counter}: {i.name}")
+            print(f"{counter}:\nID: {i.id}\nName: {i.name}\nPrice: {i.price}\nCategory: {i.category}\n")
         return self
 
     def add_product(self, new_prod):
         self.products.append(new_prod)
         return self
 
-    def sell_product(self, index):
-        print(f"The '{self.products[index].name}' object has been deleted\n")
-        del self.products[index]
+    def sell_product(self, id):
+        for i in self.products:
+            if i.id == id:
+                self.products.remove(i)
+                print(f"The object with id '{id}' has been deleted\n")
         return self
 
-    def display(self):
-        print(f"Name: {self.name}\n")
+    def inflation(self, percent_increase):
+        for i in self.products:
+            amount = i.price * percent_increase
+            i.price += amount
         return self
 
-
-kmart = Store("kmart")
-kmart.add_product(other_products.cup).add_product(other_products.pencil).display_product_names()
-kmart.sell_product(0).display_product_names()
-
-# sell_product(self, id) - remove the product from the store's list of products given the id (assume id is the index of the product in the list) and print its info.
-# inflation(self, percent_increase) - increases the price of each product by the percent_increase given (use the method you wrote in the Product class!)
-# set_clearance(self, category, percent_discount) - updates all the products matching the given category by reducing the price by the percent_discount given (use the method you wrote in the Product class!)
+    def set_clearance(self, category, percent_discount):
+        for i in self.products:
+            if i.category == category:
+                i.increase_price(percent_discount, False)
+        return self

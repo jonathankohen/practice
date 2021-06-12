@@ -1,8 +1,12 @@
+import uuid
+
+
 class Product:
     def __init__(self, name, price, category):
         self.name = name
         self.price = price
         self.category = category
+        self.id = uuid.uuid4()
 
     def increase_price(self, percentage, is_increasing):
         amount = self.price * percentage
@@ -13,9 +17,5 @@ class Product:
         return self
 
     def display(self):
-        print(f"Name: {self.name},\nPrice: {self.price}\nCategory: {self.category}")
+        print(f"ID: {self.id}\nName: {self.name},\nPrice: {self.price}\nCategory: {self.category}")
         return self
-
-
-cup = Product("Cup", 2.0, "Kitchen")
-pencil = Product("Pencil", 0.5, "School")
